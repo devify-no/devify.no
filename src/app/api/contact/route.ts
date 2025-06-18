@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import sgMail from "@sendgrid/mail";
 import { z } from "zod";
 import { env } from "~/env";
@@ -13,7 +13,9 @@ const contactSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body: unknown = await request.json();
+
+    // Parse and validate the request body with Zod schema
     const { name, email, message } = contactSchema.parse(body);
 
     const msg = {
@@ -46,6 +48,14 @@ export async function POST(request: NextRequest) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: "Ugyldig data", details: error.errors },
+        { status: 400 },
+      );
+    }
+
+    // Handle JSON parsing errors
+    if (error instanceof SyntaxError) {
+      return NextResponse.json(
+        { error: "Ugyldig JSON format" },
         { status: 400 },
       );
     }
