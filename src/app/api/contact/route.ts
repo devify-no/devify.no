@@ -12,18 +12,14 @@ const contactSchema = z.object({
   recaptchaToken: z.string().min(1, "reCAPTCHA token er påkrevd"),
 });
 
-// Type for reCAPTCHA Enterprise API response
+// Type for regular reCAPTCHA v3 API response
 interface RecaptchaResponse {
-  riskAnalysis?: {
-    score?: number;
-  };
-  tokenProperties?: {
-    valid?: boolean;
-  };
-  error?: {
-    code?: number;
-    message?: string;
-  };
+  success: boolean;
+  score?: number;
+  action?: string;
+  challenge_ts?: string;
+  hostname?: string;
+  "error-codes"?: string[];
 }
 
 export async function POST(request: NextRequest) {
@@ -35,20 +31,17 @@ export async function POST(request: NextRequest) {
 
     console.log("Verifying reCAPTCHA token...");
 
-    // Verify reCAPTCHA token
+    // Verify reCAPTCHA token using regular reCAPTCHA v3 API
     const recaptchaResponse = await fetch(
-      `https://recaptchaenterprise.googleapis.com/v1/projects/${env.GOOGLE_CLOUD_PROJECT_ID}/assessments?key=${env.GOOGLE_RECAPTCHA_SECRET_KEY}`,
+      "https://www.google.com/recaptcha/api/siteverify",
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: JSON.stringify({
-          event: {
-            token: recaptchaToken,
-            expectedAction: "contact_form",
-            siteKey: env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
-          },
+        body: new URLSearchParams({
+          secret: env.RECAPTCHA_SECRET_KEY,
+          response: recaptchaToken,
         }),
       },
     );
@@ -76,34 +69,30 @@ export async function POST(request: NextRequest) {
       JSON.stringify(recaptchaData, null, 2),
     );
 
-    // Check for API errors
-    if (recaptchaData.error) {
-      console.error("reCAPTCHA API error:", recaptchaData.error);
+    // Check if the reCAPTCHA verification was successful
+    if (!recaptchaData.success) {
+      console.error("reCAPTCHA failed:", recaptchaData["error-codes"]);
       return NextResponse.json(
-        { error: "reCAPTCHA API error", details: recaptchaData.error.message },
+        {
+          error: "reCAPTCHA validation failed",
+          details: recaptchaData["error-codes"],
+        },
         { status: 400 },
       );
     }
 
-    // Check if the reCAPTCHA is valid
-    if (
-      !recaptchaData?.riskAnalysis?.score ||
-      recaptchaData?.tokenProperties?.valid !== true
-    ) {
-      console.log(
-        "reCAPTCHA failed validation:",
-        JSON.stringify(recaptchaData, null, 2),
-      );
+    // Check the score (optional - reCAPTCHA v3 provides a score between 0.0 and 1.0)
+    const score = recaptchaData.score ?? 0;
+    console.log("reCAPTCHA verified successfully, score:", score);
+
+    // You can set a minimum score threshold if needed (e.g., 0.5)
+    if (score < 0.3) {
+      console.warn("reCAPTCHA score too low:", score);
       return NextResponse.json(
-        { error: "reCAPTCHA validation failed" },
+        { error: "reCAPTCHA score too low" },
         { status: 400 },
       );
     }
-
-    console.log(
-      "reCAPTCHA verified successfully, score:",
-      recaptchaData.riskAnalysis.score,
-    );
 
     // Proceed with sending the email if reCAPTCHA is valid
     const msg = {
@@ -118,7 +107,7 @@ export async function POST(request: NextRequest) {
         <p><strong>Melding:</strong></p>
         <p>${message.replace(/\n/g, "<br>")}</p>
         <hr>
-        <p><small>reCAPTCHA Score: ${recaptchaData.riskAnalysis.score}</small></p>
+        <p><small>reCAPTCHA Score: ${score}</small></p>
       `,
       text: `
         Ny henvendelse fra nettside
@@ -127,7 +116,7 @@ export async function POST(request: NextRequest) {
         E-post: ${email}
         Melding: ${message}
         
-        reCAPTCHA Score: ${recaptchaData.riskAnalysis.score}
+        reCAPTCHA Score: ${score}
       `,
     };
 

@@ -9,8 +9,7 @@ export const env = createEnv({
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
     SENDGRID_API_KEY: z.string(),
-    GOOGLE_RECAPTCHA_SECRET_KEY: z.string(),
-    GOOGLE_CLOUD_PROJECT_ID: z.string(),
+    RECAPTCHA_SECRET_KEY: z.string(),
   },
 
   /**
@@ -29,8 +28,7 @@ export const env = createEnv({
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
     SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
-    GOOGLE_RECAPTCHA_SECRET_KEY: process.env.GOOGLE_RECAPTCHA_SECRET_KEY,
-    GOOGLE_CLOUD_PROJECT_ID: process.env.GOOGLE_CLOUD_PROJECT_ID,
+    RECAPTCHA_SECRET_KEY: process.env.RECAPTCHA_SECRET_KEY,
     NEXT_PUBLIC_RECAPTCHA_SITE_KEY: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
   },
   /**
