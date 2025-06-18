@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { RecaptchaWrapper } from "~/components/RecaptchaWrapper";
 
 const contactSchema = z.object({
   name: z
@@ -37,12 +38,26 @@ export default function HomePage() {
     setSubmitStatus("idle");
 
     try {
+      // Get the reCAPTCHA token
+      const tokenInput = document.getElementById(
+        "recaptcha-token",
+      ) as HTMLInputElement;
+      const recaptchaToken = tokenInput?.value;
+
+      if (!recaptchaToken) {
+        setSubmitStatus("error");
+        return;
+      }
+
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          recaptchaToken,
+        }),
       });
 
       if (response.ok) {
@@ -118,6 +133,8 @@ export default function HomePage() {
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+            <RecaptchaWrapper action="contact_form" />
+
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
               <div>
                 <label
