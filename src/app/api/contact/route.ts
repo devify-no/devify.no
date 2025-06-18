@@ -20,6 +20,10 @@ interface RecaptchaResponse {
   tokenProperties?: {
     valid?: boolean;
   };
+  error?: {
+    code?: number;
+    message?: string;
+  };
 }
 
 export async function POST(request: NextRequest) {
@@ -28,6 +32,8 @@ export async function POST(request: NextRequest) {
 
     // Parse and validate the request body with Zod schema
     const { name, email, message, recaptchaToken } = contactSchema.parse(body);
+
+    console.log("Verifying reCAPTCHA token...");
 
     // Verify reCAPTCHA token
     const recaptchaResponse = await fetch(
@@ -47,16 +53,37 @@ export async function POST(request: NextRequest) {
       },
     );
 
+    console.log("reCAPTCHA response status:", recaptchaResponse.status);
+
     if (!recaptchaResponse.ok) {
-      console.error("reCAPTCHA verification failed:", recaptchaResponse.status);
+      const errorText = await recaptchaResponse.text();
+      console.error("reCAPTCHA verification failed:", {
+        status: recaptchaResponse.status,
+        statusText: recaptchaResponse.statusText,
+        body: errorText,
+      });
       return NextResponse.json(
-        { error: "reCAPTCHA verification failed" },
+        { error: "reCAPTCHA verification failed", details: errorText },
         { status: 400 },
       );
     }
 
     const recaptchaData: RecaptchaResponse =
       (await recaptchaResponse.json()) as RecaptchaResponse;
+
+    console.log(
+      "reCAPTCHA response data:",
+      JSON.stringify(recaptchaData, null, 2),
+    );
+
+    // Check for API errors
+    if (recaptchaData.error) {
+      console.error("reCAPTCHA API error:", recaptchaData.error);
+      return NextResponse.json(
+        { error: "reCAPTCHA API error", details: recaptchaData.error.message },
+        { status: 400 },
+      );
+    }
 
     // Check if the reCAPTCHA is valid
     if (
@@ -72,6 +99,11 @@ export async function POST(request: NextRequest) {
         { status: 400 },
       );
     }
+
+    console.log(
+      "reCAPTCHA verified successfully, score:",
+      recaptchaData.riskAnalysis.score,
+    );
 
     // Proceed with sending the email if reCAPTCHA is valid
     const msg = {

@@ -233,7 +233,11 @@ export default function HomePage() {
             {submitStatus === "error" && (
               <div className="mt-6 border border-red-200 bg-red-50 p-6">
                 <p className="text-center font-medium text-red-800">
-                  Noe gikk galt. Prøv igjen eller ring oss direkte.
+                  Noe gikk galt. Prøv igjen eller kontakt oss på{" "}
+                  <a href="mailto:hei@devify.no" className="text-red-800">
+                    hei@devify.no
+                  </a>
+                  .
                 </p>
               </div>
             )}
