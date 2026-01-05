@@ -19,7 +19,7 @@
     "@hookform/resolvers": "^5.1.1",
     "@sendgrid/mail": "^8.1.5",
     "@t3-oss/env-nextjs": "^0.12.0",
-    "next": "^15.2.3",
+    "next": "15.2.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.58.1",
