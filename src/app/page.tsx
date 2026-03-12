@@ -350,29 +350,35 @@ export async function POST(
       {/* Tech / trust marquee */}
       <div className="overflow-hidden border-b border-slate-100 py-4">
         <div className="animate-marquee flex w-max items-center whitespace-nowrap">
-          {[
-            "Utviklet i Norge",
-            "Etablert i 2018",
-            "Direkte dialog",
-            "Små team, høy kvalitet",
-            "Tydelige prosesser",
-            "Stabil teknologi",
-            "Langsiktig samarbeid",
-            "Profesjonell oppfølging",
-          ].map((item, i) => (
-            <span key={i} className="flex items-center">
-              <span className="font-mono text-[11px] font-light tracking-widest text-slate-400 uppercase">
-                {item}
-              </span>
+          {Array.from({ length: 4 }, (_, copy) =>
+            [
+              "Utviklet i Norge",
+              "Etablert i 2018",
+              "Direkte dialog",
+              "Små team, høy kvalitet",
+              "Tydelige prosesser",
+              "Stabil teknologi",
+              "Langsiktig samarbeid",
+              "Profesjonell oppfølging",
+            ].map((item, i) => (
               <span
-                className="mx-6 text-[10px]"
-                style={{ color: "#a7ea00" }}
-                aria-hidden="true"
+                key={`${copy}-${i}`}
+                className="flex items-center"
+                aria-hidden={copy > 0}
               >
-                ·
+                <span className="font-mono text-[11px] font-light tracking-widest text-slate-400 uppercase">
+                  {item}
+                </span>
+                <span
+                  className="mx-6 text-[10px]"
+                  style={{ color: "#a7ea00" }}
+                  aria-hidden="true"
+                >
+                  ·
+                </span>
               </span>
-            </span>
-          ))}
+            )),
+          )}
         </div>
       </div>
 
