@@ -1,10 +1,10 @@
-Devify Non-Commercial License 1.0
+Devify Non-Commercial License 1.1
 
 Copyright (c) 2026 Dev AS
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the “Software”), to use,
-copy, modify, and distribute the Software for personal, private, internal, and
+copy, and modify the Software for personal, private, internal, and other
 non-commercial purposes only, subject to the following conditions:
 
 1. Commercial use is not permitted without prior written permission from Dev AS.
@@ -16,16 +16,27 @@ non-commercial purposes only, subject to the following conditions:
    e) using substantial portions of the Software in products or services intended
       for commercial advantage or monetary compensation.
 
-2. Any copy, modification, or redistribution of the Software must include this
-   license and copyright notice.
+2. Public deployment, public hosting, or public distribution of the Software,
+   or any modified version of it, is not permitted without prior written
+   permission from Dev AS. This includes, but is not limited to:
+   a) deploying the Software to a public website or domain;
+   b) publishing the Software as a live service accessible to third parties;
+   c) redistributing the Software, in source or compiled form, for public use.
 
-3. You may not represent the Software, or any modified version of it, as an
+3. Any copy or modification of the Software must include this license and
+   copyright notice.
+
+4. You may not represent the Software, or any modified version of it, as an
    official product of Dev AS without prior written permission.
 
-4. Trademarks, service marks, branding, logos, domain names, and other brand
-   assets associated with Dev AS or Devify are not licensed under this license.
+5. Trademarks, service marks, branding, logos, domain names, design assets,
+   visual identity, and other brand assets associated with Dev AS or Devify
+   are not licensed under this license.
 
-5. The Software is provided “as is”, without warranty of any kind, express or
+6. Except as expressly stated in this license, no rights are granted to publish,
+   sublicense, distribute, commercially exploit, or publicly deploy the Software.
+
+7. The Software is provided “as is”, without warranty of any kind, express or
    implied, including but not limited to the warranties of merchantability,
    fitness for a particular purpose, and noninfringement. In no event shall
    Dev AS or the copyright holders be liable for any claim, damages, or other
@@ -33,5 +44,5 @@ non-commercial purposes only, subject to the following conditions:
    from, out of, or in connection with the Software or the use or other
    dealings in the Software.
 
-For commercial licensing inquiries, contact:
+For commercial licensing inquiries or permission requests, contact:
 hei@devify.no
