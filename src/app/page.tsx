@@ -805,7 +805,7 @@ export async function POST(
             </p>
             <div className="flex items-center gap-6">
               <a
-                href="https://github.com/Bordeaux-AS"
+                href="https://github.com/devify-no"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-xs font-light text-slate-600 transition-colors hover:text-slate-300"
