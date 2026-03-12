@@ -8,13 +8,13 @@ const description =
   "Vi bygger raske, gjennomtenkte nettsider og webløsninger for små og mellomstore bedrifter — med direkte dialog fra første møte til lansering.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://devify.no"),
+  metadataBase: new URL("https://www.devify.no"),
   title: {
     default: title,
     template: "%s | Dev AS",
   },
   description,
-  authors: [{ name: "Dev AS", url: "https://devify.no" }],
+  authors: [{ name: "Dev AS", url: "https://www.devify.no" }],
   creator: "Dev AS",
   keywords: [
     "webutvikling",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "nb_NO",
-    url: "https://devify.no",
+    url: "https://www.devify.no",
     siteName: "Dev AS",
     title,
     description,

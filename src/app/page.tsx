@@ -393,14 +393,7 @@ export async function POST(
               key={service.number}
               className="group flex flex-col gap-2 py-8 sm:flex-row sm:items-start sm:gap-12"
             >
-              <span
-                className="w-8 shrink-0 font-mono text-sm font-light text-slate-300 transition-colors"
-                style={
-                  {
-                    "--tw-group-hover-color": "#a7ea00",
-                  } as React.CSSProperties
-                }
-              >
+              <span className="w-8 shrink-0 font-mono text-sm font-light text-slate-300 transition-colors">
                 <span className="transition-colors duration-200 group-hover:text-[#a7ea00]">
                   {service.number}
                 </span>
@@ -648,9 +641,7 @@ export async function POST(
                   placeholder="din@epost.no"
                 />
                 {errors.email && (
-                  <p className="text-xs text-red-400">
-                    {errors.email.message}
-                  </p>
+                  <p className="text-xs text-red-400">{errors.email.message}</p>
                 )}
               </div>
             </div>
@@ -674,9 +665,7 @@ export async function POST(
                 placeholder="Fortell oss om prosjektet ditt..."
               />
               {errors.message && (
-                <p className="text-xs text-red-400">
-                  {errors.message.message}
-                </p>
+                <p className="text-xs text-red-400">{errors.message.message}</p>
               )}
             </div>
 

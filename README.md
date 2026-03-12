@@ -2,7 +2,7 @@
 
 Company website for **Dev AS** — a Norwegian web development studio. Built with Next.js 15, deployed on Vercel.
 
-**Live:** [devify.no](https://devify.no)
+**Live:** [devify.no](https://www.devify.no)
 
 ---
 
