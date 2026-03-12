@@ -52,7 +52,9 @@ export async function getPageSpeedScores(
       }),
     ]);
 
-    if (!mobileRes.ok || !desktopRes.ok) return null;
+    if (!mobileRes.ok || !desktopRes.ok) {
+      return null;
+    }
 
     const [mobileData, desktopData] = (await Promise.all([
       mobileRes.json(),

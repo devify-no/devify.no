@@ -31,6 +31,61 @@ const scoreMetrics: { key: keyof PSIData["desktop"]; label: string }[] = [
   { key: "seo", label: "SEO" },
 ];
 
+function ScoreRing({ score, label }: { score: number; label: string }) {
+  const r = 32;
+  const size = 84;
+  const c = size / 2;
+  const circumference = 2 * Math.PI * r;
+  const arc = circumference * (score / 100);
+  const offset = circumference * 0.25;
+  const color = score >= 90 ? "#a7ea00" : score >= 50 ? "#f59e0b" : "#f87171";
+
+  return (
+    <div className="flex flex-col items-center gap-3">
+      <svg
+        width={size}
+        height={size}
+        viewBox={`0 0 ${size} ${size}`}
+        aria-label={`${label}: ${score}`}
+      >
+        <circle
+          cx={c}
+          cy={c}
+          r={r}
+          fill="none"
+          stroke="#f1f5f9"
+          strokeWidth="3"
+        />
+        <circle
+          cx={c}
+          cy={c}
+          r={r}
+          fill="none"
+          stroke={color}
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeDasharray={`${arc} ${circumference}`}
+          strokeDashoffset={offset}
+        />
+        <text
+          x={c}
+          y={c + 1}
+          textAnchor="middle"
+          dominantBaseline="middle"
+          fontSize="16"
+          fontWeight="300"
+          fill="#0f172a"
+        >
+          {score}
+        </text>
+      </svg>
+      <p className="max-w-[84px] text-center text-[9px] leading-tight font-medium tracking-wide text-slate-400 uppercase">
+        {label}
+      </p>
+    </div>
+  );
+}
+
 export default async function HomePage() {
   const scores = await getPageSpeedScores("https://www.devify.no");
 
@@ -297,35 +352,49 @@ export async function POST(
         </div>
       </section>
 
-      {/* PageSpeed section — only renders when scores are available */}
+      {/* Proof / quality section — only renders when live scores are available */}
       {scores && (
         <section className="border-t border-slate-100">
-          <div className="mx-auto max-w-5xl px-6 py-24">
-            <p className="mb-3 text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">
-              Dokumentert ytelse
-            </p>
-            <div className="mt-10 grid gap-16 lg:grid-cols-[320px_1fr]">
-              {/* Left: context */}
+          <div className="mx-auto max-w-5xl px-6 py-28">
+            <div className="grid gap-16 lg:grid-cols-[360px_1fr] lg:items-start">
+              {/* Left: editorial copy */}
               <div>
-                <h2 className="text-3xl font-light tracking-tight text-slate-900">
-                  Ytelse i praksis
-                </h2>
-                <p className="mt-4 text-sm leading-relaxed font-light text-slate-500">
-                  Disse scorene er fra denne nettsiden — målt av Google
-                  Lighthouse og oppdatert automatisk ved hver nye deploy.
+                <p className="mb-4 text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">
+                  Dokumentert kvalitet
                 </p>
-                <a
-                  href="https://pagespeed.web.dev/?url=https%3A%2F%2Fwww.devify.no"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-5 inline-flex items-center gap-1.5 text-xs text-slate-400 transition-colors hover:text-slate-700"
-                >
-                  Se full rapport ↗
-                </a>
+                <h2 className="text-3xl leading-snug font-light tracking-tight text-slate-900 sm:text-4xl">
+                  Målt, ikke bare
+                  <br />
+                  <span className="font-medium">påstått</span>
+                </h2>
+                <p className="mt-6 text-sm leading-relaxed font-light text-slate-500">
+                  Scorene er hentet fra denne nettsiden og målt med Google
+                  Lighthouse. De oppdateres automatisk og dokumenterer
+                  kvaliteten over tid. Prosjektet er også offentlig tilgjengelig
+                  på GitHub for de som ønsker innsyn.
+                </p>
+                <div className="mt-8 flex flex-col gap-2.5">
+                  <a
+                    href="https://pagespeed.web.dev/analysis?url=https://www.devify.no"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs text-slate-400 transition-colors hover:text-slate-700"
+                  >
+                    Se full Lighthouse-rapport ↗
+                  </a>
+                  <a
+                    href="https://github.com/devify-no/devify.no"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs text-slate-400 transition-colors hover:text-slate-700"
+                  >
+                    Se prosjektet på GitHub ↗
+                  </a>
+                </div>
               </div>
 
-              {/* Right: score grids */}
-              <div className="space-y-8">
+              {/* Right: score rings */}
+              <div className="space-y-10">
                 {(
                   [
                     { label: "Desktop", data: scores.desktop },
@@ -333,22 +402,16 @@ export async function POST(
                   ] as const
                 ).map(({ label, data }) => (
                   <div key={label}>
-                    <p className="mb-3 font-mono text-[10px] tracking-widest text-slate-400 uppercase">
+                    <p className="mb-6 text-xs font-medium tracking-[0.15em] text-slate-400 uppercase">
                       {label}
                     </p>
-                    <div className="grid grid-cols-4 gap-px bg-slate-100">
+                    <div className="grid grid-cols-4 gap-4 sm:gap-8">
                       {scoreMetrics.map(({ key, label: metricLabel }) => (
-                        <div
+                        <ScoreRing
                           key={key}
-                          className="bg-white px-3 py-6 text-center"
-                        >
-                          <p className="text-3xl font-light tabular-nums text-slate-900">
-                            {data[key]}
-                          </p>
-                          <p className="mt-1.5 text-[10px] font-medium tracking-wide text-slate-400 uppercase">
-                            {metricLabel}
-                          </p>
-                        </div>
+                          score={data[key]}
+                          label={metricLabel}
+                        />
                       ))}
                     </div>
                   </div>
