@@ -8,16 +8,16 @@ Company website for **Dev AS** — a Norwegian web development studio. Built wit
 
 ## Stack
 
-| | |
-|---|---|
-| Framework | [Next.js 15](https://nextjs.org) (App Router, Turbopack) |
-| Language | TypeScript |
-| Styling | [Tailwind CSS v4](https://tailwindcss.com) |
-| Forms | [React Hook Form](https://react-hook-form.com) + [Zod](https://zod.dev) |
-| Email | [Resend](https://resend.com) |
-| Spam protection | [Google reCAPTCHA v3](https://developers.google.com/recaptcha) |
-| Deployment | [Vercel](https://vercel.com) |
-| Package manager | pnpm |
+|                 |                                                                         |
+| --------------- | ----------------------------------------------------------------------- |
+| Framework       | [Next.js 15](https://nextjs.org) (App Router, Turbopack)                |
+| Language        | TypeScript                                                              |
+| Styling         | [Tailwind CSS v4](https://tailwindcss.com)                              |
+| Forms           | [React Hook Form](https://react-hook-form.com) + [Zod](https://zod.dev) |
+| Email           | [Resend](https://resend.com)                                            |
+| Spam protection | [Google reCAPTCHA v3](https://developers.google.com/recaptcha)          |
+| Deployment      | [Vercel](https://vercel.com)                                            |
+| Package manager | pnpm                                                                    |
 
 ---
 
@@ -91,4 +91,4 @@ vercel env add NEXT_PUBLIC_RECAPTCHA_SITE_KEY
 
 ---
 
-[devify.no](https://devify.no) · [github.com/Bordeaux-AS](https://github.com/Bordeaux-AS)
+[devify.no](https://www.devify.no) · [github.com/devify-no](https://github.com/devify-no)
