@@ -35,9 +35,6 @@ function extractScores(data: PSIResponse): PSIScores {
 export async function getPageSpeedScores(
   url: string,
 ): Promise<PSIData | null> {
-  // Skip in dev — PSI can't reach localhost and it slows down the dev server
-  if (process.env.NODE_ENV !== "production") return null;
-
   const apiKey = process.env.GOOGLE_PSI_API_KEY;
   const base = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed";
   const cats =
