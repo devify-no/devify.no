@@ -40,7 +40,7 @@ const services = [
     number: "02",
     title: "SEO",
     description:
-      "Teknisk og innholdsmessig søkemotoroptimalisering som gjør at nettsiden din kan bli funnet av de riktige kundene — uten å betale for annonsering.",
+      "Teknisk og innholdsmessig søkemotoroptimalisering som gjør nettsiden bedre rustet til å bli funnet av de riktige kundene på Google.",
   },
   {
     number: "03",
@@ -269,8 +269,8 @@ export async function POST(
             style={{ animationDelay: "240ms" }}
           >
             Vi bygger raske, gjennomtenkte nettsider og webløsninger for små og
-            mellomstore bedrifter — og du snakker direkte med utvikleren fra
-            første dag.
+            mellomstore bedrifter — med direkte dialog fra første møte til
+            lansering.
           </p>
 
           {/* CTA */}
@@ -331,7 +331,7 @@ export async function POST(
       <div className="border-y border-slate-100">
         <div className="mx-auto grid max-w-5xl grid-cols-3 divide-x divide-slate-100 px-6">
           {[
-            { value: "7+", label: "År med erfaring" },
+            { value: "2018", label: "Etablert" },
             { value: "50+", label: "Leveranser gjennomført" },
             { value: "1 dag", label: "Vanlig svartid" },
           ].map(({ value, label }) => (
@@ -356,12 +356,8 @@ export async function POST(
             "Direkte dialog",
             "Små team, høy kvalitet",
             "Tydelige prosesser",
-            "Gjennomtenkte leveranser",
             "Stabil teknologi",
             "Langsiktig samarbeid",
-            "Ingen unødvendige mellomledd",
-            "Teknisk kvalitet i fokus",
-            "Rolig og ryddig prosjektflyt",
             "Profesjonell oppfølging",
           ].map((item, i) => (
             <span key={i} className="flex items-center">
@@ -447,7 +443,7 @@ export async function POST(
             </p>
             <p className="mt-4 leading-relaxed font-light text-slate-500">
               Hos oss er det ingen mellomledd. Du kommuniserer direkte med
-              personen som skriver koden, fra første samtale til lansering og
+              personen som bygger løsningen, fra første samtale til lansering og
               videre oppfølging.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -504,7 +500,7 @@ export async function POST(
               {
                 step: "03",
                 title: "Design og utvikling",
-                body: "Vi jobber iterativt og holder deg oppdatert underveis. Du ser fremdrift, ikke bare et sluttprodukt.",
+                body: "Vi jobber iterativt og holder deg oppdatert underveis, slik at du ser hvordan prosjektet utvikler seg før lansering.",
               },
               {
                 step: "04",
@@ -589,8 +585,8 @@ export async function POST(
               Trenger du ny nettside eller hjelp med en eksisterende løsning?
             </h2>
             <p className="mt-4 font-light text-slate-400">
-              Send oss en melding, så tar vi en uformell prat. Uforpliktende —
-              vi tar gjerne en kort samtale først.
+              Send oss en melding, så tar vi en uforpliktende prat om behov og
+              muligheter.
             </p>
             <p className="mt-2 text-sm text-slate-600">
               Vanlig svartid: innen 1 virkedag.
@@ -799,7 +795,14 @@ export async function POST(
               <p className="text-sm font-light text-slate-500">
                 Org.nr. 920 937 160 MVA
                 <br />
-                Foretaksregisteret
+                <a
+                  href="https://w2.brreg.no/enhet/sok/detalj.jsp?orgnr=920937160"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors hover:text-slate-300"
+                >
+                  Foretaksregisteret
+                </a>
               </p>
               <p className="mt-4 text-xs font-light text-slate-600">
                 Utviklet og driftet i Norge
