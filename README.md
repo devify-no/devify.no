@@ -91,9 +91,9 @@ vercel env add NEXT_PUBLIC_RECAPTCHA_SITE_KEY
 
 ## License
 
-This project is source-available under the [Devify Non-Commercial License 1.0](LICENSE).
-Personal, private, internal, and other non-commercial use is allowed.
-Commercial use requires prior written permission from Dev AS.
+This project is source-available under the [Devify Non-Commercial License 1.1](LICENSE).
+
+You may use and modify it for personal, private, internal, and other non-commercial purposes only. Commercial use, public deployment, public hosting, and redistribution require prior written permission from Dev AS.
 
 ---
 
