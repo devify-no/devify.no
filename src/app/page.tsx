@@ -3,7 +3,9 @@ import { AnimatedProcessGrid } from "~/components/AnimatedProcessGrid";
 import { AnimatedScoreRing } from "~/components/AnimatedScoreRing";
 import { AnimatedServiceList } from "~/components/AnimatedServiceList";
 import { ContactForm } from "~/components/ContactForm";
+import { FAQSection } from "~/components/FAQSection";
 import { StickyNav } from "~/components/StickyNav";
+import { faqs } from "~/lib/faq";
 import { getPageSpeedScores, type PSIData } from "~/lib/pagespeed";
 
 const scoreMetrics: { key: keyof PSIData["desktop"]; label: string }[] = [
@@ -16,8 +18,25 @@ const scoreMetrics: { key: keyof PSIData["desktop"]; label: string }[] = [
 export default async function HomePage() {
   const scores = await getPageSpeedScores("https://www.devify.no");
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <StickyNav />
 
       {/* Hero Section */}
@@ -409,6 +428,8 @@ export async function POST(
         </div>
       </section>
 
+      <FAQSection />
+
       {/* Contact Section — inverted */}
       <section id="kontakt" className="relative overflow-hidden bg-slate-950">
         {/* Crosshatch grid */}
@@ -525,6 +546,7 @@ export async function POST(
                   { href: "#tjenester", label: "Tjenester" },
                   { href: "#om-oss", label: "Om oss" },
                   { href: "#hvordan", label: "Slik jobber vi" },
+                  { href: "#faq", label: "FAQ" },
                   { href: "#kontakt", label: "Kontakt" },
                 ].map(({ href, label }) => (
                   <a
