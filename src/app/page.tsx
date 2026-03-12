@@ -4,6 +4,7 @@ import { AnimatedScoreRing } from "~/components/AnimatedScoreRing";
 import { AnimatedServiceList } from "~/components/AnimatedServiceList";
 import { ContactForm } from "~/components/ContactForm";
 import { FAQSection } from "~/components/FAQSection";
+import { HeroBrowserMockup } from "~/components/HeroBrowserMockup";
 import { StickyNav } from "~/components/StickyNav";
 import { faqs } from "~/lib/faq";
 import { getPageSpeedScores, type PSIData } from "~/lib/pagespeed";
@@ -72,114 +73,74 @@ export default async function HomePage() {
           aria-hidden="true"
         />
 
-        {/* Code fragment — left */}
-        <div
-          className="animate-float-a pointer-events-none absolute top-[14%] left-6 hidden select-none xl:block"
-          style={{ opacity: 0.11 }}
-          aria-hidden="true"
-        >
-          <div className="w-56 border-l-2 border-[#a7ea00] bg-white/60 py-3 pr-5 pl-4 backdrop-blur-[1px]">
-            <pre className="font-mono text-[10px] leading-[1.7] text-slate-800">{`// app/page.tsx
-import type { Metadata }
-  from "next"
+        <div className="relative z-10 mx-auto w-full max-w-6xl">
+          <div className="grid items-center gap-12 lg:grid-cols-[1fr_460px] xl:gap-20">
+            {/* Text content */}
+            <div className="text-center lg:text-left">
+              {/* Eyebrow */}
+              <div
+                className="animate-fade-up mb-8 flex items-center justify-center gap-4 lg:justify-start"
+                style={{ animationDelay: "0ms" }}
+              >
+                <span className="h-px w-10" style={{ background: "#a7ea00" }} />
+                <span className="text-xs font-medium tracking-[0.2em] text-slate-500 uppercase">
+                  Norsk utviklerbyrå
+                </span>
+                <span className="h-px w-10" style={{ background: "#a7ea00" }} />
+              </div>
 
-export const metadata: Metadata = {
-  title: "Dev AS",
-  openGraph: {
-    type: "website",
-    locale: "nb_NO",
-  },
-}
+              {/* Heading */}
+              <h1
+                className="animate-fade-up text-6xl leading-[1.05] font-light tracking-tight text-slate-900 sm:text-7xl xl:text-8xl"
+                style={{ animationDelay: "120ms" }}
+              >
+                Nettsider uten
+                <br />
+                <span className="bg-gradient-to-br from-slate-900 via-slate-700 to-slate-500 bg-clip-text font-semibold text-transparent">
+                  byrålag
+                </span>
+              </h1>
 
-export default async
-function Page() {
-  return <HomePage />
-}`}</pre>
-          </div>
-        </div>
+              {/* Subtext */}
+              <p
+                className="animate-fade-up mx-auto mt-8 max-w-xl text-lg leading-relaxed font-light text-slate-500 sm:text-xl lg:mx-0"
+                style={{ animationDelay: "240ms" }}
+              >
+                Vi bygger raske, gjennomtenkte nettsider og webløsninger for
+                små og mellomstore bedrifter — med direkte dialog fra første
+                møte til lansering.
+              </p>
 
-        {/* Code fragment — right */}
-        <div
-          className="animate-float-b pointer-events-none absolute right-6 bottom-[18%] hidden select-none xl:block"
-          style={{ opacity: 0.11 }}
-          aria-hidden="true"
-        >
-          <div className="w-60 border-l-2 border-[#a7ea00] bg-white/60 py-3 pr-5 pl-4 backdrop-blur-[1px]">
-            <pre className="font-mono text-[10px] leading-[1.7] text-slate-800">{`// api/contact/route.ts
-export async function POST(
-  req: Request,
-) {
-  const body = await req.json()
-  const token = await verify(
-    body.recaptchaToken,
-  )
-  if (!token.success) {
-    return Response.json(
-      { error: "Invalid token" },
-      { status: 400 },
-    )
-  }
-  await sendEmail(body)
-  return Response.json({ ok: true })
-}`}</pre>
-          </div>
-        </div>
+              {/* CTA */}
+              <div
+                className="animate-fade-up mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start"
+                style={{ animationDelay: "360ms" }}
+              >
+                <a
+                  href="#kontakt"
+                  className="group inline-flex items-center gap-2 border border-slate-900 px-8 py-3.5 text-sm font-medium tracking-wide text-slate-900 transition-all duration-200 hover:border-[#a7ea00] hover:bg-[#a7ea00] hover:text-slate-950"
+                >
+                  Ta kontakt
+                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">
+                    →
+                  </span>
+                </a>
+                <a
+                  href="#hvordan"
+                  className="text-sm font-light text-slate-400 transition-colors hover:text-slate-700"
+                >
+                  Slik jobber vi ↓
+                </a>
+              </div>
+            </div>
 
-        <div className="relative z-10 mx-auto max-w-5xl text-center">
-          {/* Eyebrow */}
-          <div
-            className="animate-fade-up mb-8 flex items-center justify-center gap-4"
-            style={{ animationDelay: "0ms" }}
-          >
-            <span className="h-px w-10" style={{ background: "#a7ea00" }} />
-            <span className="text-xs font-medium tracking-[0.2em] text-slate-500 uppercase">
-              Norsk utviklerbyrå
-            </span>
-            <span className="h-px w-10" style={{ background: "#a7ea00" }} />
-          </div>
-
-          {/* Heading */}
-          <h1
-            className="animate-fade-up text-6xl leading-[1.05] font-light tracking-tight text-slate-900 sm:text-7xl lg:text-8xl xl:text-9xl"
-            style={{ animationDelay: "120ms" }}
-          >
-            Nettsider uten
-            <br />
-            <span className="bg-gradient-to-br from-slate-900 via-slate-700 to-slate-500 bg-clip-text font-semibold text-transparent">
-              byrålag
-            </span>
-          </h1>
-
-          {/* Subtext */}
-          <p
-            className="animate-fade-up mx-auto mt-8 max-w-xl text-lg leading-relaxed font-light text-slate-500 sm:text-xl"
-            style={{ animationDelay: "240ms" }}
-          >
-            Vi bygger raske, gjennomtenkte nettsider og webløsninger for små og
-            mellomstore bedrifter — med direkte dialog fra første møte til
-            lansering.
-          </p>
-
-          {/* CTA */}
-          <div
-            className="animate-fade-up mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
-            style={{ animationDelay: "360ms" }}
-          >
-            <a
-              href="#kontakt"
-              className="group inline-flex items-center gap-2 border border-slate-900 px-8 py-3.5 text-sm font-medium tracking-wide text-slate-900 transition-all duration-200 hover:border-[#a7ea00] hover:bg-[#a7ea00] hover:text-slate-950"
+            {/* Browser mockup — desktop only */}
+            <div
+              className="animate-fade-up hidden lg:block"
+              style={{ animationDelay: "480ms" }}
             >
-              Ta kontakt
-              <span className="transition-transform duration-200 group-hover:translate-x-0.5">
-                →
-              </span>
-            </a>
-            <a
-              href="#hvordan"
-              className="text-sm font-light text-slate-400 transition-colors hover:text-slate-700"
-            >
-              Slik jobber vi ↓
-            </a>
+              <HeroBrowserMockup />
+            </div>
           </div>
         </div>
 
@@ -234,38 +195,40 @@ export async function POST(
         </div>
       </div>
 
-      {/* Tech / trust marquee */}
-      <div className="overflow-hidden border-b border-slate-100 py-4">
-        <div className="animate-marquee flex w-max items-center whitespace-nowrap">
-          {Array.from({ length: 4 }, (_, copy) =>
-            [
-              "Utviklet i Norge",
-              "Etablert i 2018",
-              "Direkte dialog",
-              "Små team, høy kvalitet",
-              "Tydelige prosesser",
-              "Stabil teknologi",
-              "Langsiktig samarbeid",
-              "Profesjonell oppfølging",
-            ].map((item, i) => (
-              <span
-                key={`${copy}-${i}`}
-                className="flex items-center"
-                aria-hidden={copy > 0}
+      {/* Trust strip */}
+      <div className="border-b border-slate-100">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4">
+            {(
+              [
+                { label: "Ingen mellomledd", desc: "Du snakker alltid med utvikleren" },
+                { label: "Etablert 2018", desc: "Lang erfaring med norske bedrifter" },
+                { label: "Klar plan fra start", desc: "Pris, tidslinje og leveranser avtalt" },
+                { label: "Teknisk SEO", desc: "Bygget inn i løsningen fra dag én" },
+              ] as const
+            ).map(({ label, desc }, i) => (
+              <div
+                key={label}
+                className={[
+                  "py-7",
+                  i === 0 ? "pr-6" : "px-6",
+                  i > 0 ? "border-l border-slate-100" : "",
+                  i >= 2 ? "border-t border-slate-100 md:border-t-0" : "",
+                  // item 2 has no left border on mobile (starts new row), but does on md+
+                  i === 2 ? "border-l-0 md:border-l" : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
               >
-                <span className="font-mono text-[11px] font-light tracking-widest text-slate-400 uppercase">
-                  {item}
-                </span>
-                <span
-                  className="mx-6 text-[10px]"
-                  style={{ color: "#a7ea00" }}
-                  aria-hidden="true"
-                >
-                  ·
-                </span>
-              </span>
-            )),
-          )}
+                <p className="text-xs font-medium tracking-[0.15em] text-slate-900 uppercase">
+                  {label}
+                </p>
+                <p className="mt-1.5 text-xs font-light leading-relaxed text-slate-400">
+                  {desc}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
