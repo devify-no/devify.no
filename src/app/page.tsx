@@ -32,11 +32,49 @@ export default async function HomePage() {
     })),
   };
 
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: "Dev AS",
+    alternateName: "devify.no",
+    url: "https://www.devify.no",
+    logo: "https://www.devify.no/android-chrome-512x512.png",
+    foundingDate: "2018",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Drognesjordet 113",
+      postalCode: "2150",
+      addressLocality: "Årnes",
+      addressCountry: "NO",
+    },
+    telephone: "+4790227000",
+    email: "hei@devify.no",
+    areaServed: "NO",
+    knowsLanguage: ["nb", "en"],
+    sameAs: ["https://github.com/devify-no"],
+  };
+
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Dev AS",
+    url: "https://www.devify.no",
+    inLanguage: "nb-NO",
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
       <StickyNav />
 

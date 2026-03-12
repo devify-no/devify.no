@@ -34,20 +34,15 @@ export const metadata: Metadata = {
     siteName: "Dev AS",
     title,
     description,
-    images: [
-      {
-        url: "/android-chrome-512x512.png",
-        width: 512,
-        height: 512,
-        alt: "Dev AS",
-      },
-    ],
+    images: [],
+  },
+  alternates: {
+    canonical: "https://www.devify.no",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title,
     description,
-    images: ["/android-chrome-512x512.png"],
   },
   icons: {
     icon: [
