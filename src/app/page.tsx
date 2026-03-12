@@ -1,28 +1,10 @@
 import Image from "next/image";
+import { AnimatedProcessGrid } from "~/components/AnimatedProcessGrid";
+import { AnimatedScoreRing } from "~/components/AnimatedScoreRing";
+import { AnimatedServiceList } from "~/components/AnimatedServiceList";
 import { ContactForm } from "~/components/ContactForm";
 import { StickyNav } from "~/components/StickyNav";
 import { getPageSpeedScores, type PSIData } from "~/lib/pagespeed";
-
-const services = [
-  {
-    number: "01",
-    title: "Webutvikling",
-    description:
-      "Vi bygger raske, stabile nettsider og webløsninger som ser profesjonelle ut, fungerer godt på mobil og er enkle å videreutvikle når behovene endrer seg.",
-  },
-  {
-    number: "02",
-    title: "SEO",
-    description:
-      "Teknisk og innholdsmessig søkemotoroptimalisering som gjør nettsiden bedre rustet til å bli funnet av de riktige kundene på Google.",
-  },
-  {
-    number: "03",
-    title: "Vedlikehold",
-    description:
-      "Vi kan ta ansvar for drift, oppdateringer og teknisk oppfølging etter lansering, slik at du slipper å tenke på det og kan fokusere på kjernevirksomheten.",
-  },
-];
 
 const scoreMetrics: { key: keyof PSIData["desktop"]; label: string }[] = [
   { key: "performance", label: "Ytelse" },
@@ -31,60 +13,6 @@ const scoreMetrics: { key: keyof PSIData["desktop"]; label: string }[] = [
   { key: "seo", label: "SEO" },
 ];
 
-function ScoreRing({ score, label }: { score: number; label: string }) {
-  const r = 32;
-  const size = 84;
-  const c = size / 2;
-  const circumference = 2 * Math.PI * r;
-  const arc = circumference * (score / 100);
-  const offset = circumference * 0.25;
-  const color = score >= 90 ? "#a7ea00" : score >= 50 ? "#f59e0b" : "#f87171";
-
-  return (
-    <div className="flex flex-col items-center gap-3">
-      <svg
-        width={size}
-        height={size}
-        viewBox={`0 0 ${size} ${size}`}
-        aria-label={`${label}: ${score}`}
-      >
-        <circle
-          cx={c}
-          cy={c}
-          r={r}
-          fill="none"
-          stroke="#f1f5f9"
-          strokeWidth="3"
-        />
-        <circle
-          cx={c}
-          cy={c}
-          r={r}
-          fill="none"
-          stroke={color}
-          strokeWidth="3"
-          strokeLinecap="round"
-          strokeDasharray={`${arc} ${circumference}`}
-          strokeDashoffset={offset}
-        />
-        <text
-          x={c}
-          y={c + 1}
-          textAnchor="middle"
-          dominantBaseline="middle"
-          fontSize="16"
-          fontWeight="300"
-          fill="#0f172a"
-        >
-          {score}
-        </text>
-      </svg>
-      <p className="max-w-[84px] text-center text-[9px] leading-tight font-medium tracking-wide text-slate-400 uppercase">
-        {label}
-      </p>
-    </div>
-  );
-}
 
 export default async function HomePage() {
   const scores = await getPageSpeedScores("https://www.devify.no");
@@ -328,28 +256,7 @@ export async function POST(
         <h2 className="mb-4 text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">
           Hva gjør vi
         </h2>
-        <div className="mt-10 divide-y divide-slate-200">
-          {services.map((service) => (
-            <div
-              key={service.number}
-              className="group flex flex-col gap-2 py-8 sm:flex-row sm:items-start sm:gap-12"
-            >
-              <span className="w-8 shrink-0 font-mono text-sm font-light text-slate-300 transition-colors">
-                <span className="transition-colors duration-200 group-hover:text-[#a7ea00]">
-                  {service.number}
-                </span>
-              </span>
-              <div className="flex flex-1 flex-col gap-2 sm:flex-row sm:items-start sm:gap-12">
-                <h3 className="w-44 shrink-0 text-base font-medium text-slate-900">
-                  {service.title}
-                </h3>
-                <p className="flex-1 leading-relaxed font-light text-slate-500">
-                  {service.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <AnimatedServiceList />
       </section>
 
       {/* Proof / quality section — only renders when live scores are available */}
@@ -407,7 +314,7 @@ export async function POST(
                     </p>
                     <div className="grid grid-cols-4 gap-4 sm:gap-8">
                       {scoreMetrics.map(({ key, label: metricLabel }) => (
-                        <ScoreRing
+                        <AnimatedScoreRing
                           key={key}
                           score={data[key]}
                           label={metricLabel}
@@ -499,42 +406,7 @@ export async function POST(
           <h2 className="mb-16 text-3xl font-light tracking-tight text-slate-900 sm:text-4xl">
             Forutsigbart fra start til mål
           </h2>
-          <div className="grid gap-px bg-slate-200 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                step: "01",
-                title: "Innledende prat",
-                body: "Vi tar en uformell samtale om hva du trenger og hva som er målet. Ingen forpliktelse.",
-              },
-              {
-                step: "02",
-                title: "Tilbud og plan",
-                body: "Du får et tydelig tilbud med pris, leveranser og estimert tidslinje — ingen overraskelser.",
-              },
-              {
-                step: "03",
-                title: "Design og utvikling",
-                body: "Vi jobber iterativt og holder deg oppdatert underveis, slik at du ser hvordan prosjektet utvikler seg før lansering.",
-              },
-              {
-                step: "04",
-                title: "Lansering og oppfølging",
-                body: "Vi hjelper med lansering og er tilgjengelige for spørsmål og justeringer etter at siden er live.",
-              },
-            ].map(({ step, title, body }) => (
-              <div key={step} className="bg-white p-8">
-                <span className="font-mono text-xs font-light text-slate-300">
-                  {step}
-                </span>
-                <h3 className="mt-4 text-base font-medium text-slate-900">
-                  {title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed font-light text-slate-500">
-                  {body}
-                </p>
-              </div>
-            ))}
-          </div>
+          <AnimatedProcessGrid />
         </div>
       </section>
 
