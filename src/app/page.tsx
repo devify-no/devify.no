@@ -335,14 +335,15 @@ export default async function HomePage() {
             </h2>
             <p className="mt-6 leading-relaxed font-light text-slate-500">
               Hei, jeg er Moritz — grunnleggeren av Dev AS. Jeg startet
-              selskapet fordi jeg opplevde at mange kunder måtte velge mellom
-              upersonlige byråprosesser og billige leveranser med varierende
-              kvalitet.
+              selskapet fordi jeg ville bygge noe lite og skikkelig: et sted der
+              kunden alltid vet hvem som gjør jobben, og der det er den personen
+              du faktisk snakker med.
             </p>
             <p className="mt-4 leading-relaxed font-light text-slate-500">
-              Hos oss er det ingen mellomledd. Du kommuniserer direkte med
-              personen som bygger løsningen, fra første samtale til lansering og
-              videre oppfølging.
+              Ingen mellomledd betyr mer enn kortere e-posttråder. Det betyr at
+              den som forstår hva du trenger, også er den som bygger det — og
+              som kan svare deg ærlig om hva som er mulig, og hva som ikke er
+              det.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               {["Next.js", "TypeScript", "React", "Tailwind", "Vercel"].map(
