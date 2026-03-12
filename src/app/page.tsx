@@ -543,23 +543,29 @@ export async function POST(
           aria-hidden="true"
         />
 
-        {/* Lime glow — top-left corner */}
+        {/* Corner viewfinder brackets */}
+        {(
+          [
+            "top-8 left-8 border-l-2 border-t-2",
+            "top-8 right-8 border-r-2 border-t-2",
+            "bottom-8 left-8 border-l-2 border-b-2",
+            "bottom-8 right-8 border-r-2 border-b-2",
+          ] as const
+        ).map((cls) => (
+          <div
+            key={cls}
+            className={`pointer-events-none absolute h-10 w-10 border-[#a7ea00] opacity-20 ${cls}`}
+            aria-hidden="true"
+          />
+        ))}
+
+        {/* Concentric circle outlines — centered reticle */}
         <div
-          className="pointer-events-none absolute top-0 left-0 h-[700px] w-[700px] opacity-20"
-          style={{
-            background:
-              "radial-gradient(ellipse at top left, #a7ea00 0%, transparent 60%)",
-          }}
+          className="pointer-events-none absolute top-1/2 left-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#a7ea00] opacity-[0.05]"
           aria-hidden="true"
         />
-
-        {/* Dim the grid where the glow lives so text stays readable */}
         <div
-          className="pointer-events-none absolute top-0 left-0 h-[400px] w-[400px] opacity-80"
-          style={{
-            background:
-              "radial-gradient(ellipse at top left, #0a0f0a 0%, transparent 70%)",
-          }}
+          className="pointer-events-none absolute top-1/2 left-1/2 h-[820px] w-[820px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#a7ea00] opacity-[0.03]"
           aria-hidden="true"
         />
 
