@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 declare global {
@@ -125,8 +126,7 @@ export default function HomePage() {
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <Link href="/" className="flex items-center gap-3">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/logo-icon.svg"
               alt=""
               width={22}
@@ -472,12 +472,16 @@ export async function POST(
               className="pointer-events-none absolute inset-0 hidden translate-x-4 translate-y-4 border border-[#a7ea00]/50 md:block"
               aria-hidden="true"
             />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/moritz.jpeg"
-              alt="Moritz, grunnlegger av Dev AS"
-              className="relative z-10 aspect-[3/4] w-full max-w-sm object-cover grayscale md:ml-auto"
-            />
+            <div className="relative z-10 aspect-[3/4] w-full max-w-sm md:ml-auto">
+              <Image
+                src="/moritz.jpeg"
+                alt="Moritz, grunnlegger av Dev AS"
+                fill
+                sizes="(max-width: 768px) 100vw, 384px"
+                className="object-cover grayscale"
+                priority
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -786,8 +790,7 @@ export async function POST(
           <div className="grid grid-cols-2 gap-8 md:grid-cols-5">
             <div className="col-span-2 md:col-span-1">
               <div className="mb-2 flex items-center gap-2">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src="/logo-icon.svg"
                   alt=""
                   width={20}
