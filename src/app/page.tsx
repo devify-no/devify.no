@@ -13,7 +13,6 @@ const scoreMetrics: { key: keyof PSIData["desktop"]; label: string }[] = [
   { key: "seo", label: "SEO" },
 ];
 
-
 export default async function HomePage() {
   const scores = await getPageSpeedScores("https://www.devify.no");
 
@@ -276,9 +275,9 @@ export async function POST(
                 </h2>
                 <p className="mt-6 text-sm leading-relaxed font-light text-slate-500">
                   Scorene er hentet fra denne nettsiden og målt med Google
-                  Lighthouse. De oppdateres automatisk og dokumenterer
-                  kvaliteten over tid. Prosjektet er også offentlig tilgjengelig
-                  på GitHub for de som ønsker innsyn.
+                  Lighthouse. De oppdateres automatisk og viser hvordan siden
+                  presterer på desktop og mobil. Prosjektet er også offentlig
+                  tilgjengelig på GitHub for de som ønsker innsyn.
                 </p>
                 <div className="mt-8 flex flex-col gap-2.5">
                   <a
