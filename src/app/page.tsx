@@ -1,34 +1,7 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-
-declare global {
-  const grecaptcha: {
-    ready: (cb: () => void) => void;
-    execute: (siteKey: string, options: { action: string }) => Promise<string>;
-  };
-}
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { env } from "~/env";
-import { RecaptchaWrapper } from "~/components/RecaptchaWrapper";
-
-const contactSchema = z.object({
-  name: z
-    .string()
-    .min(1, "Navn er påkrevd")
-    .min(2, "Navn må være minst 2 tegn"),
-  email: z.string().min(1, "E-post er påkrevd").email("Ugyldig e-postadresse"),
-  message: z
-    .string()
-    .min(1, "Melding er påkrevd")
-    .min(10, "Meldingen må være minst 10 tegn"),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
+import { ContactForm } from "~/components/ContactForm";
+import { StickyNav } from "~/components/StickyNav";
+import { getPageSpeedScores, type PSIData } from "~/lib/pagespeed";
 
 const services = [
   {
@@ -51,106 +24,19 @@ const services = [
   },
 ];
 
-export default function HomePage() {
-  const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
-  >("idle");
+const scoreMetrics: { key: keyof PSIData["desktop"]; label: string }[] = [
+  { key: "performance", label: "Ytelse" },
+  { key: "accessibility", label: "Tilgjengelighet" },
+  { key: "bestPractices", label: "Beste praksis" },
+  { key: "seo", label: "SEO" },
+];
 
-  const [navDark, setNavDark] = useState(false);
-
-  useEffect(() => {
-    const update = () => {
-      const section = document.getElementById("kontakt");
-      if (!section) return;
-      setNavDark(window.scrollY + 72 >= section.offsetTop);
-    };
-    window.addEventListener("scroll", update, { passive: true });
-    update();
-    return () => window.removeEventListener("scroll", update);
-  }, []);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    reset,
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
-  });
-
-  const getRecaptchaToken = (): Promise<string> =>
-    new Promise((resolve, reject) => {
-      grecaptcha.ready(() => {
-        grecaptcha
-          .execute(env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, {
-            action: "contact_form",
-          })
-          .then(resolve)
-          .catch(reject);
-      });
-    });
-
-  const onSubmit = async (data: ContactFormData) => {
-    setSubmitStatus("idle");
-
-    try {
-      const recaptchaToken = await getRecaptchaToken();
-
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, recaptchaToken }),
-      });
-
-      if (response.ok) {
-        setSubmitStatus("success");
-        reset();
-      } else {
-        setSubmitStatus("error");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      setSubmitStatus("error");
-    }
-  };
+export default async function HomePage() {
+  const scores = await getPageSpeedScores("https://www.devify.no");
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <header
-        className={`fixed top-0 right-0 left-0 z-50 border-b backdrop-blur-md transition-colors duration-300 ${
-          navDark
-            ? "border-slate-800/60 bg-slate-950/90"
-            : "border-slate-200/50 bg-white/80"
-        }`}
-      >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/logo-icon.svg"
-              alt=""
-              width={22}
-              height={25}
-              aria-hidden="true"
-            />
-            <span
-              className={`text-lg font-medium tracking-tight transition-colors duration-300 ${navDark ? "text-white" : "text-slate-900"}`}
-            >
-              Dev
-            </span>
-          </Link>
-          <a
-            href="#kontakt"
-            className={`text-sm font-medium transition-colors duration-300 ${
-              navDark
-                ? "text-slate-400 hover:text-white"
-                : "text-slate-500 hover:text-slate-900"
-            }`}
-          >
-            Kontakt oss →
-          </a>
-        </div>
-      </header>
+      <StickyNav />
 
       {/* Hero Section */}
       <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-16">
@@ -175,7 +61,7 @@ export default function HomePage() {
           aria-hidden="true"
         />
 
-        {/* Lime glow bottom-left — balances composition */}
+        {/* Lime glow bottom-left */}
         <div
           className="pointer-events-none absolute bottom-0 left-0 h-[500px] w-[500px] opacity-10"
           style={{
@@ -411,6 +297,68 @@ export async function POST(
         </div>
       </section>
 
+      {/* PageSpeed section — only renders when scores are available */}
+      {scores && (
+        <section className="border-t border-slate-100">
+          <div className="mx-auto max-w-5xl px-6 py-24">
+            <p className="mb-3 text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">
+              Dokumentert ytelse
+            </p>
+            <div className="mt-10 grid gap-16 lg:grid-cols-[320px_1fr]">
+              {/* Left: context */}
+              <div>
+                <h2 className="text-3xl font-light tracking-tight text-slate-900">
+                  Ytelse i praksis
+                </h2>
+                <p className="mt-4 text-sm leading-relaxed font-light text-slate-500">
+                  Disse scorene er fra denne nettsiden — målt av Google
+                  Lighthouse og oppdatert automatisk ved hver nye deploy.
+                </p>
+                <a
+                  href="https://pagespeed.web.dev/?url=https%3A%2F%2Fwww.devify.no"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-flex items-center gap-1.5 text-xs text-slate-400 transition-colors hover:text-slate-700"
+                >
+                  Se full rapport ↗
+                </a>
+              </div>
+
+              {/* Right: score grids */}
+              <div className="space-y-8">
+                {(
+                  [
+                    { label: "Desktop", data: scores.desktop },
+                    { label: "Mobil", data: scores.mobile },
+                  ] as const
+                ).map(({ label, data }) => (
+                  <div key={label}>
+                    <p className="mb-3 font-mono text-[10px] tracking-widest text-slate-400 uppercase">
+                      {label}
+                    </p>
+                    <div className="grid grid-cols-4 gap-px bg-slate-100">
+                      {scoreMetrics.map(({ key, label: metricLabel }) => (
+                        <div
+                          key={key}
+                          className="bg-white px-3 py-6 text-center"
+                        >
+                          <p className="text-3xl font-light tabular-nums text-slate-900">
+                            {data[key]}
+                          </p>
+                          <p className="mt-1.5 text-[10px] font-medium tracking-wide text-slate-400 uppercase">
+                            {metricLabel}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* About / founder section */}
       <section
         id="om-oss"
@@ -460,7 +408,7 @@ export async function POST(
           </div>
 
           <div className="relative order-1 md:order-2">
-            {/* Offset lime frame — editorial photo treatment */}
+            {/* Offset lime frame */}
             <div
               className="pointer-events-none absolute inset-0 hidden translate-x-4 translate-y-4 border border-[#a7ea00]/50 md:block"
               aria-hidden="true"
@@ -529,7 +477,7 @@ export async function POST(
 
       {/* Contact Section — inverted */}
       <section id="kontakt" className="relative overflow-hidden bg-slate-950">
-        {/* Crosshatch grid — deliberately different from the hero dots */}
+        {/* Crosshatch grid */}
         <div
           className="pointer-events-none absolute inset-0"
           style={{
@@ -558,7 +506,7 @@ export async function POST(
           />
         ))}
 
-        {/* Concentric circle outlines — centered reticle */}
+        {/* Concentric circles */}
         <div
           className="pointer-events-none absolute top-1/2 left-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#a7ea00] opacity-[0.05]"
           aria-hidden="true"
@@ -568,7 +516,7 @@ export async function POST(
           aria-hidden="true"
         />
 
-        {/* Closing brace — decorative anchor point bottom-right */}
+        {/* Closing brace */}
         <div
           className="pointer-events-none absolute right-6 bottom-12 hidden font-mono text-[22rem] leading-none font-thin text-white opacity-[0.06] select-none xl:block"
           aria-hidden="true"
@@ -596,180 +544,7 @@ export async function POST(
             </p>
           </div>
 
-          <RecaptchaWrapper />
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-              <div className="space-y-2">
-                <label
-                  htmlFor="name"
-                  className="block text-xs font-medium tracking-widest text-slate-500 uppercase"
-                >
-                  Navn
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  {...register("name")}
-                  className={`block w-full border bg-slate-900 px-4 py-3.5 text-sm text-white placeholder-slate-600 transition-all duration-200 focus:outline-none ${
-                    errors.name
-                      ? "border-red-500/60 focus:border-red-400"
-                      : "border-slate-800 focus:border-[#a7ea00]/60 focus:bg-slate-900/80"
-                  }`}
-                  placeholder="Ditt navn"
-                />
-                {errors.name && (
-                  <p className="text-xs text-red-400">{errors.name.message}</p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <label
-                  htmlFor="email"
-                  className="block text-xs font-medium tracking-widest text-slate-500 uppercase"
-                >
-                  E-post
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  {...register("email")}
-                  className={`block w-full border bg-slate-900 px-4 py-3.5 text-sm text-white placeholder-slate-600 transition-all duration-200 focus:outline-none ${
-                    errors.email
-                      ? "border-red-500/60 focus:border-red-400"
-                      : "border-slate-800 focus:border-[#a7ea00]/60 focus:bg-slate-900/80"
-                  }`}
-                  placeholder="din@epost.no"
-                />
-                {errors.email && (
-                  <p className="text-xs text-red-400">{errors.email.message}</p>
-                )}
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <label
-                htmlFor="message"
-                className="block text-xs font-medium tracking-widest text-slate-500 uppercase"
-              >
-                Melding
-              </label>
-              <textarea
-                id="message"
-                rows={6}
-                {...register("message")}
-                className={`block w-full resize-none border bg-slate-900 px-4 py-3.5 text-sm text-white placeholder-slate-600 transition-all duration-200 focus:outline-none ${
-                  errors.message
-                    ? "border-red-500/60 focus:border-red-400"
-                    : "border-slate-800 focus:border-[#a7ea00]/60 focus:bg-slate-900/80"
-                }`}
-                placeholder="Fortell oss om prosjektet ditt..."
-              />
-              {errors.message && (
-                <p className="text-xs text-red-400">{errors.message.message}</p>
-              )}
-            </div>
-
-            <div className="pt-2">
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="group flex w-full cursor-pointer items-center justify-center gap-3 bg-white px-8 py-4 text-sm font-medium tracking-wide text-slate-950 transition-all duration-200 hover:bg-[#a7ea00] focus:ring-2 focus:ring-[#a7ea00] focus:ring-offset-2 focus:ring-offset-slate-950 focus:outline-none active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                {isSubmitting ? (
-                  <>
-                    <svg
-                      className="h-4 w-4 animate-spin"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      aria-hidden="true"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                      />
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8v8z"
-                      />
-                    </svg>
-                    Sender...
-                  </>
-                ) : (
-                  <>
-                    Send melding
-                    <span className="transition-transform duration-200 group-hover:translate-x-1">
-                      →
-                    </span>
-                  </>
-                )}
-              </button>
-            </div>
-
-            {submitStatus === "success" && (
-              <div className="flex items-start gap-4 border border-[#a7ea00]/20 bg-[#a7ea00]/5 px-5 py-4">
-                <svg
-                  className="mt-0.5 h-4 w-4 shrink-0 text-[#a7ea00]"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M2.5 8.5l3.5 3.5 7-7"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <div>
-                  <p className="text-sm font-medium text-white">
-                    Melding mottatt
-                  </p>
-                  <p className="mt-0.5 text-sm font-light text-slate-400">
-                    Vi tar kontakt innen 1 virkedag.
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {submitStatus === "error" && (
-              <div className="flex items-start gap-4 border border-red-500/20 bg-red-950/30 px-5 py-4">
-                <svg
-                  className="mt-0.5 h-4 w-4 shrink-0 text-red-400"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M8 2v7M8 12.5v.5"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                </svg>
-                <div>
-                  <p className="text-sm font-medium text-red-300">
-                    Noe gikk galt
-                  </p>
-                  <p className="mt-0.5 text-sm font-light text-slate-400">
-                    Prøv igjen, eller skriv til{" "}
-                    <a
-                      href="mailto:hei@devify.no"
-                      className="text-slate-300 underline underline-offset-2 hover:text-white"
-                    >
-                      hei@devify.no
-                    </a>
-                    .
-                  </p>
-                </div>
-              </div>
-            )}
-          </form>
+          <ContactForm />
         </div>
       </section>
 
