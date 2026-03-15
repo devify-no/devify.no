@@ -17,7 +17,8 @@ const scoreMetrics: { key: keyof PSIData["desktop"]; label: string }[] = [
 ];
 
 export default async function HomePage() {
-  const scores = await getPageSpeedScores("https://www.devify.no");
+  // const scores = await getPageSpeedScores("https://www.devify.no");
+  const scores = null as PSIData | null;
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -144,9 +145,9 @@ export default async function HomePage() {
                 className="animate-fade-up mx-auto mt-8 max-w-xl text-lg leading-relaxed font-light text-slate-500 sm:text-xl lg:mx-0"
                 style={{ animationDelay: "240ms" }}
               >
-                Vi bygger raske, gjennomtenkte nettsider og webløsninger for
-                små og mellomstore bedrifter — med direkte dialog fra første
-                møte til lansering.
+                Vi bygger raske, gjennomtenkte nettsider og webløsninger for små
+                og mellomstore bedrifter — med direkte dialog fra første møte
+                til lansering.
               </p>
 
               {/* CTA */}
@@ -239,10 +240,22 @@ export default async function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-4">
             {(
               [
-                { label: "Ingen mellomledd", desc: "Du snakker alltid med utvikleren" },
-                { label: "Etablert 2018", desc: "Lang erfaring med norske bedrifter" },
-                { label: "Klar plan fra start", desc: "Pris, tidslinje og leveranser avtalt" },
-                { label: "Teknisk SEO", desc: "Bygget inn i løsningen fra dag én" },
+                {
+                  label: "Ingen mellomledd",
+                  desc: "Du snakker alltid med utvikleren",
+                },
+                {
+                  label: "Etablert 2018",
+                  desc: "Lang erfaring med norske bedrifter",
+                },
+                {
+                  label: "Klar plan fra start",
+                  desc: "Pris, tidslinje og leveranser avtalt",
+                },
+                {
+                  label: "Teknisk SEO",
+                  desc: "Bygget inn i løsningen fra dag én",
+                },
               ] as const
             ).map(({ label, desc }, i) => (
               <div
@@ -261,7 +274,7 @@ export default async function HomePage() {
                 <p className="text-xs font-medium tracking-[0.15em] text-slate-900 uppercase">
                   {label}
                 </p>
-                <p className="mt-1.5 text-xs font-light leading-relaxed text-slate-400">
+                <p className="mt-1.5 text-xs leading-relaxed font-light text-slate-400">
                   {desc}
                 </p>
               </div>
