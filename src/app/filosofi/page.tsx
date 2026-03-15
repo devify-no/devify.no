@@ -295,24 +295,81 @@ export default function FilosofiPage() {
         </section>
       </main>
 
-      <footer className="border-t border-slate-800 bg-slate-950">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-8">
-          <p className="text-xs font-light text-slate-600">
-            Dev AS © 2018–{new Date().getFullYear()}
+      {/* Les videre */}
+      <section className="border-t border-slate-100 px-6 py-12">
+        <div className="mx-auto max-w-5xl">
+          <p className="mb-5 text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">
+            Les videre
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-col gap-5 sm:flex-row sm:gap-12">
             <Link
-              href="/personvern"
-              className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
+              href="/uten-byralag"
+              className="group flex items-start gap-3 text-sm text-slate-600 transition-colors hover:text-slate-900"
             >
-              Personvern
+              <span className="mt-0.5 shrink-0 text-slate-300 transition-transform duration-200 group-hover:translate-x-0.5">
+                →
+              </span>
+              <span>
+                <span className="block font-medium text-slate-900 group-hover:text-slate-700">
+                  Nettsider uten byrålag — hva betyr det i praksis?
+                </span>
+                <span className="text-xs font-light text-slate-400">
+                  Posisjon
+                </span>
+              </span>
             </Link>
             <Link
-              href="/"
-              className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
+              href="/ressurser"
+              className="group flex items-start gap-3 text-sm text-slate-600 transition-colors hover:text-slate-900"
             >
-              Forsiden
+              <span className="mt-0.5 shrink-0 text-slate-300 transition-transform duration-200 group-hover:translate-x-0.5">
+                →
+              </span>
+              <span>
+                <span className="block font-medium text-slate-900 group-hover:text-slate-700">
+                  Fagartikler om webutvikling
+                </span>
+                <span className="text-xs font-light text-slate-400">
+                  Ressurser
+                </span>
+              </span>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      <footer className="border-t border-slate-800 bg-slate-950">
+        <div className="mx-auto max-w-5xl px-6 py-8">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-xs font-light text-slate-600">
+              Dev AS © 2018–{new Date().getFullYear()}
+            </p>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+              <Link
+                href="/ressurser"
+                className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
+              >
+                Ressurser
+              </Link>
+              <Link
+                href="/uten-byralag"
+                className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
+              >
+                Uten byrålag
+              </Link>
+              <Link
+                href="/personvern"
+                className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
+              >
+                Personvern
+              </Link>
+              <Link
+                href="/"
+                className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
+              >
+                Forsiden
+              </Link>
+            </div>
           </div>
         </div>
       </footer>

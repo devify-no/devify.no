@@ -372,7 +372,22 @@ export default function UtenByralagPage() {
               </p>
               <p>
                 Hvis du lurer på om vi er riktig match, er det raskeste svaret
-                å ta en prat. Det koster ingenting og forplikter ingen.
+                å ta en prat. Det koster ingenting og forplikter ingen. Vil du
+                lese mer om hvordan vi tenker først, kan du se på{" "}
+                <Link
+                  href="/ressurser"
+                  className="text-slate-700 underline underline-offset-4 transition-colors hover:text-slate-900"
+                >
+                  fagartiklene våre
+                </Link>{" "}
+                eller{" "}
+                <Link
+                  href="/ressurser/skreddersydd-nettside"
+                  className="text-slate-700 underline underline-offset-4 transition-colors hover:text-slate-900"
+                >
+                  når skreddersøm faktisk lønner seg
+                </Link>
+                .
               </p>
             </div>
           </div>
@@ -431,23 +446,37 @@ export default function UtenByralagPage() {
       </main>
 
       <footer className="border-t border-slate-800 bg-slate-950">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-8">
-          <p className="text-xs font-light text-slate-600">
-            Dev AS © 2018–{new Date().getFullYear()}
-          </p>
-          <div className="flex items-center gap-6">
-            <Link
-              href="/personvern"
-              className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
-            >
-              Personvern
-            </Link>
-            <Link
-              href="/"
-              className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
-            >
-              Forsiden
-            </Link>
+        <div className="mx-auto max-w-5xl px-6 py-8">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-xs font-light text-slate-600">
+              Dev AS © 2018–{new Date().getFullYear()}
+            </p>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+              <Link
+                href="/ressurser"
+                className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
+              >
+                Ressurser
+              </Link>
+              <Link
+                href="/filosofi"
+                className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
+              >
+                Filosofi
+              </Link>
+              <Link
+                href="/personvern"
+                className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
+              >
+                Personvern
+              </Link>
+              <Link
+                href="/"
+                className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
+              >
+                Forsiden
+              </Link>
+            </div>
           </div>
         </div>
       </footer>

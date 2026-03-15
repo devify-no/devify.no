@@ -333,6 +333,49 @@ export default function NextjsBedriftsnettsiderPage() {
           </div>
         </section>
 
+        {/* Related reading */}
+        <section className="border-t border-slate-100 px-6 py-12">
+          <div className="mx-auto max-w-5xl">
+            <p className="mb-5 text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">
+              Les også
+            </p>
+            <div className="flex flex-col gap-5 sm:flex-row sm:gap-12">
+              <Link
+                href="/ressurser/headless-cms"
+                className="group flex items-start gap-3 text-sm text-slate-600 transition-colors hover:text-slate-900"
+              >
+                <span className="mt-0.5 shrink-0 text-slate-300 transition-transform duration-200 group-hover:translate-x-0.5">
+                  →
+                </span>
+                <span>
+                  <span className="block font-medium text-slate-900 group-hover:text-slate-700">
+                    Headless CMS eller tradisjonell løsning?
+                  </span>
+                  <span className="text-xs font-light text-slate-400">
+                    Arkitektur · 6 min lesing
+                  </span>
+                </span>
+              </Link>
+              <Link
+                href="/ressurser/ytelse-tilgjengelighet-seo"
+                className="group flex items-start gap-3 text-sm text-slate-600 transition-colors hover:text-slate-900"
+              >
+                <span className="mt-0.5 shrink-0 text-slate-300 transition-transform duration-200 group-hover:translate-x-0.5">
+                  →
+                </span>
+                <span>
+                  <span className="block font-medium text-slate-900 group-hover:text-slate-700">
+                    Ytelse, tilgjengelighet og SEO henger sammen
+                  </span>
+                  <span className="text-xs font-light text-slate-400">
+                    Faglig · 7 min lesing
+                  </span>
+                </span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
         <section className="relative overflow-hidden bg-slate-950">
           <div
@@ -386,23 +429,43 @@ export default function NextjsBedriftsnettsiderPage() {
       </main>
 
       <footer className="border-t border-slate-800 bg-slate-950">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-8">
-          <p className="text-xs font-light text-slate-600">
-            Dev AS © 2018–{new Date().getFullYear()}
-          </p>
-          <div className="flex items-center gap-6">
-            <Link
-              href="/personvern"
-              className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
-            >
-              Personvern
-            </Link>
-            <Link
-              href="/"
-              className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
-            >
-              Forsiden
-            </Link>
+        <div className="mx-auto max-w-5xl px-6 py-8">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-xs font-light text-slate-600">
+              Dev AS © 2018–{new Date().getFullYear()}
+            </p>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+              <Link
+                href="/ressurser"
+                className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
+              >
+                Ressurser
+              </Link>
+              <Link
+                href="/filosofi"
+                className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
+              >
+                Filosofi
+              </Link>
+              <Link
+                href="/uten-byralag"
+                className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
+              >
+                Uten byrålag
+              </Link>
+              <Link
+                href="/personvern"
+                className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
+              >
+                Personvern
+              </Link>
+              <Link
+                href="/"
+                className="text-xs font-light text-slate-600 transition-colors hover:text-slate-400"
+              >
+                Forsiden
+              </Link>
+            </div>
           </div>
         </div>
       </footer>

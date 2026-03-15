@@ -43,16 +43,38 @@ export function StickyNav() {
             Dev
           </span>
         </Link>
-        <a
-          href="#kontakt"
-          className={`text-sm font-medium transition-colors duration-300 ${
-            navDark
-              ? "text-slate-400 hover:text-white"
-              : "text-slate-500 hover:text-slate-900"
-          }`}
-        >
-          Kontakt oss →
-        </a>
+        <div className="flex items-center gap-6">
+          <Link
+            href="/ressurser"
+            className={`hidden text-sm font-light transition-colors duration-300 sm:block ${
+              navDark
+                ? "text-slate-400 hover:text-white"
+                : "text-slate-500 hover:text-slate-900"
+            }`}
+          >
+            Ressurser
+          </Link>
+          <Link
+            href="/filosofi"
+            className={`hidden text-sm font-light transition-colors duration-300 sm:block ${
+              navDark
+                ? "text-slate-400 hover:text-white"
+                : "text-slate-500 hover:text-slate-900"
+            }`}
+          >
+            Filosofi
+          </Link>
+          <a
+            href="#kontakt"
+            className={`text-sm font-medium transition-colors duration-300 ${
+              navDark
+                ? "text-slate-400 hover:text-white"
+                : "text-slate-500 hover:text-slate-900"
+            }`}
+          >
+            Kontakt oss →
+          </a>
+        </div>
       </div>
     </header>
   );
