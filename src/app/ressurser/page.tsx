@@ -10,6 +10,34 @@ export const metadata: Metadata = {
 
 const articles = [
   {
+    href: "/ressurser/nextjs-bedriftsnettsider",
+    label: "Faglig",
+    title: "Hvorfor vi bruker Next.js til moderne bedriftsnettsider",
+    desc: "Den faglige begrunnelsen for rammeverksvalget — ytelse, vedlikehold, sikkerhet og hva det faktisk betyr for kunden.",
+    readTime: "5 min",
+  },
+  {
+    href: "/ressurser/headless-cms",
+    label: "Arkitektur",
+    title: "Headless CMS eller tradisjonell løsning?",
+    desc: "Når gir headless mening, når gjør det ikke det, og hva bør du egentlig tenke på? En moden vurdering uten teknologihype.",
+    readTime: "6 min",
+  },
+  {
+    href: "/ressurser/skreddersydd-nettside",
+    label: "Guide",
+    title: "Når lønner det seg å bygge skreddersydd?",
+    desc: "Ikke alle nettsider bør bygges skreddersydd. Her er de konkrete tegnene på at en mal ikke er nok — og når det faktisk er verdt investeringen.",
+    readTime: "5 min",
+  },
+  {
+    href: "/ressurser/ytelse-tilgjengelighet-seo",
+    label: "Faglig",
+    title: "Ytelse, tilgjengelighet og SEO henger sammen",
+    desc: "De behandles som tre separate sjekklister. Men de springer alle ut av det samme: en nettside som er bygget godt.",
+    readTime: "7 min",
+  },
+  {
     href: "/ressurser/inkluderende-design",
     label: "Tilgjengelighet",
     title: "Webutvikling og inkluderende design: hvorfor det betyr noe i praksis",
