@@ -4,102 +4,64 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Nettsider uten byrålag — hva betyr det i praksis? | Dev AS",
+  title: "Drift og vedlikehold av nettside | Dev AS",
   description:
-    "Direkte kontakt, tydeligere ansvar og mer fokus på selve leveransen. Slik jobber vi — og derfor kaller vi det nettsider uten byrålag.",
+    "Vi tar hånd om hosting, oppdateringer, overvåking og support etter lansering. Nettsiden din fungerer — uten at du trenger å tenke på det.",
 };
 
-const pillars = [
+const included = [
   {
     id: "01",
-    title: "Direkte kontakt",
-    body: "Du kommuniserer med den som faktisk skriver koden. Ingen prosjektleder som videresender beskjeder, ingen account manager som tolker kravene dine. Det du sier, er det vi hører.",
+    title: "Hosting og infrastruktur",
+    body: "Vi setter opp og drifter hosting på moderne plattformer med god oppetid. SSL-sertifikat, CDN og automatisk skalering er inkludert.",
   },
   {
     id: "02",
-    title: "Færre ledd",
-    body: "I et tradisjonelt byrå går en oppgave gjennom salg, prosjektledelse, design, utvikling og QA — hvert ledd legger til tid, pris og potensiell misforståelse. Vi kutter de fleste av dem.",
+    title: "Sikkerhetsoppdateringer",
+    body: "Avhengigheter og rammeverk holdes oppdatert. Kjente sårbarheter tettes før de blir et problem.",
   },
   {
     id: "03",
-    title: "Tydeligere ansvar",
-    body: "Hvem eier kvaliteten? I et stort byrå er det diffust. Hos oss er det klart. Én person er ansvarlig for det som leveres — og det er den du snakker med.",
+    title: "Overvåking og varsling",
+    body: "Vi overvåker oppetid og ytelse. Hvis noe går ned, vet vi om det — gjerne før du gjør det.",
   },
   {
     id: "04",
-    title: "Mer realistiske prosesser",
-    body: "Byråer selger skreddersydde prosesser, men kjører dem gjennom standardiserte maler. Vi tilpasser arbeidsmåten til prosjektet — ikke prosjektet til arbeidsmåten.",
+    title: "Innholdsoppdateringer",
+    body: "Trenger du å endre tekst, bilder eller struktur? Vi ordner det raskt, uten at du trenger å lære deg et CMS.",
   },
   {
     id: "05",
-    title: "Mindre overhead",
-    body: "Kontorlokaler i Aker Brygge, merkevarefilm og en rekke fagledere som ikke er involvert i prosjektet ditt — alt det koster noe, og du betaler for det. Vi har ikke det.",
+    title: "Backup og gjenoppretting",
+    body: "Daglige sikkerhetskopier og en klar plan for gjenoppretting. Hvis noe skjer, kommer vi oss tilbake raskt.",
   },
   {
     id: "06",
-    title: "Mer fokus på leveransen",
-    body: "Uten lag å administrere og presentasjoner å produsere, kan vi bruke mer av prosjekttiden på det som faktisk betyr noe: å bygge noe godt.",
+    title: "Teknisk support",
+    body: "Du har direkte tilgang til oss for tekniske spørsmål. Ikke et ticketsystem — en melding.",
   },
 ];
 
 const comparison = [
   {
-    topic: "Hvem du snakker med",
-    agency: "En account manager eller prosjektleder. Utvikleren treffer du kanskje aldri.",
-    us: "Den som bygger nettsiden. Direkte.",
+    topic: "Tilgjengelighet",
+    self: "Du er ansvarlig for å følge med, oppdatere og reagere på problemer.",
+    us: "Vi overvåker og handler. Du slipper å tenke på det.",
   },
   {
-    topic: "Tilbakemelding og endringer",
-    agency: "Noteres i et ticketsystem, prioriteres i neste sprint, leveres i neste release.",
-    us: "Tas opp i samtalen. Fikses raskt om det er enkelt, estimeres ærlig om det er komplekst.",
+    topic: "Oppdateringer",
+    self: "Manuelt arbeid som ofte utsettes til det er for sent.",
+    us: "Løpende, planlagt vedlikehold — ikke brannslukking.",
   },
   {
-    topic: "Prising",
-    agency: "Timepriser inkluderer overhead for alle som ikke jobber på prosjektet ditt.",
-    us: "Du betaler for faktisk arbeid. Ikke for møtene vi ikke har.",
+    topic: "Innholdsendringer",
+    self: "Krever enten CMS-opplæring eller å vente på en utvikler.",
+    us: "Send en melding. Vi fikser det, gjerne samme dag.",
   },
   {
-    topic: "Ansvarsforhold",
-    agency: "Fordelt på roller. Lett å skylde på hverandre når noe går galt.",
-    us: "Klart og udelt. En person, ett ansvar.",
-  },
-  {
-    topic: "Prosjektvarighet",
-    agency: "Byråprosesser har innebygde forsinkelser: godkjenningsrunder, kapasitetsplanlegging, handover mellom team.",
-    us: "Kortere løp fordi vi ikke venter på hverandre.",
-  },
-  {
-    topic: "Hva du betaler for",
-    agency: "Tid brukt av mange mennesker, inkludert de som koordinerer de som koordinerer de som jobber.",
-    us: "Resultatet.",
-  },
-];
-
-const process = [
-  {
-    step: "01",
-    title: "Første samtale",
-    desc: "Du snakker med den som skal bygge prosjektet — ikke en selger som overleverer til et team. Vi stiller spørsmål, du stiller spørsmål, og vi finner ut om vi er riktig match.",
-  },
-  {
-    step: "02",
-    title: "Tilbud og scope",
-    desc: "Vi sender et skriftlig tilbud med konkret scope og pris. Ingen dynamisk prising som eskalerer, ingen «det avhenger av»-svar uten forklaring.",
-  },
-  {
-    step: "03",
-    title: "Bygging",
-    desc: "Du har løpende tilgang til fremdrift. Spørsmål besvares direkte. Endringer underveis håndteres pragmatisk — ikke formelt.",
-  },
-  {
-    step: "04",
-    title: "Levering",
-    desc: "Du får koden, tilgangene og dokumentasjonen. Ingenting holdes tilbake som forhandlingskort for fremtidige kontrakter.",
-  },
-  {
-    step: "05",
-    title: "Etter levering",
-    desc: "Vi er tilgjengelige for spørsmål og videre utvikling. Ikke via en support-portal — via en melding.",
+    topic: "Kostnader",
+    self: "Uforutsigbare — store regninger når noe går galt.",
+    us: "Fast månedspris. Du vet hva du betaler.",
   },
 ];
 
@@ -110,7 +72,7 @@ const cornerBrackets = [
   "bottom-6 right-6 border-r-2 border-b-2",
 ];
 
-export default function UtenByralagPage() {
+export default function DriftOgVedlikeholdPage() {
   return (
     <div className="flex min-h-screen flex-col bg-white">
       <header className="border-b border-slate-100">
@@ -156,70 +118,37 @@ export default function UtenByralagPage() {
           />
           <div className="relative z-10 mx-auto max-w-3xl">
             <p className="mb-4 text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">
-              Dev AS — posisjon
+              Dev AS — drift
             </p>
             <h1 className="text-4xl font-light leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-              Nettsider{" "}
-              <span className="font-semibold">uten byrålag</span>
+              Drift og{" "}
+              <span className="font-semibold">vedlikehold</span>
             </h1>
             <p className="mt-3 text-2xl font-light tracking-tight text-slate-400 sm:text-3xl">
-              Hva betyr det i praksis?
+              Nettsiden din i gode hender
             </p>
             <p className="mt-8 max-w-xl text-lg leading-relaxed font-light text-slate-500">
-              Det er ikke et slagord. Det er en beskrivelse av hvordan vi er
-              organisert, hvem du snakker med, og hva du faktisk betaler for.
+              Lansering er ikke slutten — det er starten. Vi sørger for at
+              nettsiden din fungerer, er oppdatert og er sikker, dag etter dag.
             </p>
           </div>
         </section>
 
-        {/* Problem with layers */}
-        <section className="border-b border-slate-100 px-6 py-20">
-          <div className="mx-auto max-w-3xl">
-            <p className="mb-4 text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">
-              Problemet med lag
-            </p>
-            <h2 className="mb-8 text-2xl font-light tracking-tight text-slate-900 sm:text-3xl">
-              Byrålag er ikke en feil —{" "}
-              <span className="font-semibold">de er et valg</span>
-            </h2>
-            <div className="space-y-5 text-sm leading-relaxed font-light text-slate-600">
-              <p>
-                Store byråer er bygget for store kunder. De har prosesser,
-                hierarkier og roller fordi de håndterer mange prosjekter
-                parallelt, med mange mennesker involvert. Det gir mening
-                i den konteksten.
-              </p>
-              <p>
-                Men for en bedrift som trenger en god nettside — ikke en
-                kampanje som skal koordineres på tvers av ti markeder — er
-                de lagene friksjon. Du betaler for strukturen. Du venter på
-                godkjenningsrundene. Du forklarer det samme tre ganger til
-                tre forskjellige personer.
-              </p>
-              <p>
-                Vi har valgt å ikke bygge den strukturen. Ikke fordi vi ikke
-                kan — men fordi vi mener et godt nettstedsprosjekt ikke
-                trenger det. Det trenger kompetente folk, direkte kommunikasjon
-                og et klart fokus på hva som skal leveres.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Six pillars */}
+        {/* What's included */}
         <section className="border-b border-slate-100 bg-slate-950 px-6 py-20">
           <div className="mx-auto max-w-5xl">
             <div className="mb-12">
               <p className="mb-3 text-xs font-medium tracking-[0.2em] text-slate-500 uppercase">
-                Hva det innebærer
+                Hva som er inkludert
               </p>
               <h2 className="text-2xl font-light tracking-tight text-white sm:text-3xl">
-                Seks konkrete ting det betyr for deg
+                Alt du trenger —{" "}
+                <span className="font-semibold">ingenting du ikke trenger</span>
               </h2>
             </div>
 
             <div className="grid gap-px bg-slate-800 sm:grid-cols-2 lg:grid-cols-3">
-              {pillars.map(({ id, title, body }) => (
+              {included.map(({ id, title, body }) => (
                 <div key={id} className="flex flex-col bg-slate-950 p-8">
                   <span
                     className="mb-5 inline-block self-start px-2 py-0.5 font-mono text-xs font-medium"
@@ -244,11 +173,11 @@ export default function UtenByralagPage() {
           <div className="mx-auto max-w-5xl">
             <div className="mb-12">
               <p className="mb-3 text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">
-                Konkret forskjell
+                Med og uten driftsavtale
               </p>
               <h2 className="text-2xl font-light tracking-tight text-slate-900 sm:text-3xl">
-                Med byrålag —{" "}
-                <span className="font-semibold">og uten</span>
+                Hva du slipper —{" "}
+                <span className="font-semibold">og hva du beholder</span>
               </h2>
             </div>
 
@@ -262,7 +191,7 @@ export default function UtenByralagPage() {
                   </div>
                   <div className="bg-slate-900 px-5 py-3">
                     <span className="text-xs font-medium text-slate-400">
-                      Tradisjonelt byrå
+                      Uten driftsavtale
                     </span>
                   </div>
                   <div className="bg-slate-900 px-5 py-3">
@@ -270,10 +199,10 @@ export default function UtenByralagPage() {
                       className="font-mono text-xs font-medium"
                       style={{ color: "#a7ea00" }}
                     >
-                      Dev AS
+                      Med Dev AS
                     </span>
                   </div>
-                  {comparison.map(({ topic, agency, us }) => (
+                  {comparison.map(({ topic, self, us }) => (
                     <Fragment key={topic}>
                       <div className="bg-white px-5 py-4">
                         <p className="text-sm font-medium text-slate-900">
@@ -282,7 +211,7 @@ export default function UtenByralagPage() {
                       </div>
                       <div className="bg-white px-5 py-4">
                         <p className="text-sm font-light leading-relaxed text-slate-500">
-                          {agency}
+                          {self}
                         </p>
                       </div>
                       <div className="bg-white px-5 py-4">
@@ -298,88 +227,30 @@ export default function UtenByralagPage() {
           </div>
         </section>
 
-        {/* Process */}
+        {/* Honest framing */}
         <section className="border-b border-slate-100 bg-slate-50 px-6 py-20">
-          <div className="mx-auto max-w-5xl">
-            <div className="mb-12">
-              <p className="mb-3 text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">
-                Slik ser det ut i praksis
-              </p>
-              <h2 className="text-2xl font-light tracking-tight text-slate-900 sm:text-3xl">
-                En typisk prosjektprosess —{" "}
-                <span className="font-semibold">uten unødvendige runder</span>
-              </h2>
-            </div>
-
-            <div className="space-y-px bg-slate-200">
-              {process.map(({ step, title, desc }) => (
-                <div
-                  key={step}
-                  className="flex items-start gap-8 bg-white px-8 py-7"
-                >
-                  <div className="flex shrink-0 flex-col items-center gap-1.5">
-                    <span
-                      className="inline-block px-2 py-0.5 font-mono text-xs font-medium"
-                      style={{ background: "#a7ea00", color: "#0f172a" }}
-                    >
-                      {step}
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className="mb-1.5 text-sm font-semibold tracking-tight text-slate-900">
-                      {title}
-                    </h3>
-                    <p className="text-sm font-light leading-relaxed text-slate-500">
-                      {desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* The honest caveat */}
-        <section className="border-b border-slate-100 px-6 py-20">
           <div className="mx-auto max-w-3xl">
             <p className="mb-4 text-xs font-medium tracking-[0.2em] text-slate-400 uppercase">
               Ærlig sagt
             </p>
             <h2 className="mb-8 text-2xl font-light tracking-tight text-slate-900 sm:text-3xl">
-              Det er ikke riktig for alle
+              Ikke alle trenger en driftsavtale
             </h2>
             <div className="space-y-5 text-sm leading-relaxed font-light text-slate-600">
               <p>
-                Noen prosjekter trenger byråstørrelse. Et nettsted med ti
-                dedikerte redaktører, fem markeder og integrasjoner mot
-                et enterprise-CMS er et annet dyr enn det vi beskriver her.
-                Store organisasjoner har legitime grunner til å velge store
-                byråer.
+                Har du en intern utvikler som tar hånd om dette, eller en enkel
+                statisk side som sjelden endres, er en driftsavtale kanskje ikke
+                nødvendig. Vi presser det ikke på noen.
               </p>
               <p>
-                Men for flertallet av norske bedrifter — som trenger en
-                profesjonell, rask og vedlikeholdbar nettside som faktisk
-                representerer dem godt — er byråstrukturen mer hinder enn
-                hjelp.
+                Men for de fleste bedrifter som bruker nettsiden sin aktivt og
+                ikke vil bruke tid på teknisk forvaltning, er det en fornuftig
+                investering. Faste kostnader slår uforutsigbare regninger for
+                krisehåndtering.
               </p>
               <p>
-                Hvis du lurer på om vi er riktig match, er det raskeste svaret
-                å ta en prat. Det koster ingenting og forplikter ingen. Vil du
-                lese mer om hvordan vi tenker først, kan du se på{" "}
-                <Link
-                  href="/ressurser"
-                  className="text-slate-700 underline underline-offset-4 transition-colors hover:text-slate-900"
-                >
-                  fagartiklene våre
-                </Link>{" "}
-                eller{" "}
-                <Link
-                  href="/ressurser/skreddersydd-nettside"
-                  className="text-slate-700 underline underline-offset-4 transition-colors hover:text-slate-900"
-                >
-                  når skreddersøm faktisk lønner seg
-                </Link>
-                .
+                Usikker? Ta en prat — vi gir deg et ærlig svar på om du
+                trenger det.
               </p>
             </div>
           </div>
@@ -407,14 +278,13 @@ export default function UtenByralagPage() {
           ))}
           <div className="relative z-10 mx-auto max-w-2xl px-6 py-24 text-center">
             <p className="mb-4 text-xs font-medium tracking-[0.2em] text-slate-500 uppercase">
-              Klar for en direkte samtale?
+              La oss ta oss av det tekniske
             </p>
             <h2 className="text-3xl font-light tracking-tight text-white sm:text-4xl">
-              Du snakker med den som bygger det
+              Nettsiden din i trygge hender
             </h2>
             <p className="mx-auto mt-4 max-w-xl font-light text-slate-400">
-              Ikke med en selger. Ikke med en prosjektleder. Med den som faktisk
-              skal lage nettsiden din.
+              Fokuser på bedriften din. Vi passer på at nettsiden fungerer.
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Link
@@ -427,10 +297,10 @@ export default function UtenByralagPage() {
                 </span>
               </Link>
               <Link
-                href="/filosofi"
+                href="/tjenester"
                 className="text-sm font-light text-slate-400 transition-colors hover:text-slate-300"
               >
-                Les om filosofien vår →
+                Se alle tjenester →
               </Link>
             </div>
           </div>

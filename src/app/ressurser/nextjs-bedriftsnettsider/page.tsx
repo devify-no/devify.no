@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -270,32 +271,23 @@ export default function NextjsBedriftsnettsiderPage() {
                     </span>
                   </div>
                   {comparisonRows.map(({ topic, nextjs, wordpress }) => (
-                    <>
-                      <div
-                        key={`${topic}-topic`}
-                        className="bg-white px-5 py-4"
-                      >
+                    <Fragment key={topic}>
+                      <div className="bg-white px-5 py-4">
                         <p className="text-sm font-medium text-slate-900">
                           {topic}
                         </p>
                       </div>
-                      <div
-                        key={`${topic}-nextjs`}
-                        className="bg-white px-5 py-4"
-                      >
+                      <div className="bg-white px-5 py-4">
                         <p className="text-sm font-light leading-relaxed text-slate-600">
                           {nextjs}
                         </p>
                       </div>
-                      <div
-                        key={`${topic}-wp`}
-                        className="bg-white px-5 py-4"
-                      >
+                      <div className="bg-white px-5 py-4">
                         <p className="text-sm font-light leading-relaxed text-slate-500">
                           {wordpress}
                         </p>
                       </div>
-                    </>
+                    </Fragment>
                   ))}
                 </div>
               </div>

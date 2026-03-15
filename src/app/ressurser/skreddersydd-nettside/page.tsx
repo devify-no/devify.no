@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -306,32 +307,23 @@ export default function SkreddersyddNettside() {
                     </span>
                   </div>
                   {costBreakdown.map(({ factor, template, custom }) => (
-                    <>
-                      <div
-                        key={`${factor}-factor`}
-                        className="bg-white px-5 py-4"
-                      >
+                    <Fragment key={factor}>
+                      <div className="bg-white px-5 py-4">
                         <p className="text-sm font-medium text-slate-900">
                           {factor}
                         </p>
                       </div>
-                      <div
-                        key={`${factor}-template`}
-                        className="bg-white px-5 py-4"
-                      >
+                      <div className="bg-white px-5 py-4">
                         <p className="text-sm font-light leading-relaxed text-slate-500">
                           {template}
                         </p>
                       </div>
-                      <div
-                        key={`${factor}-custom`}
-                        className="bg-white px-5 py-4"
-                      >
+                      <div className="bg-white px-5 py-4">
                         <p className="text-sm font-light leading-relaxed text-slate-600">
                           {custom}
                         </p>
                       </div>
-                    </>
+                    </Fragment>
                   ))}
                 </div>
               </div>
