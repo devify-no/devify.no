@@ -39,6 +39,13 @@
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.57.0"
   },
+  "browserslist": [
+    "chrome >= 93",
+    "edge >= 93",
+    "firefox >= 92",
+    "safari >= 15.4",
+    "not dead"
+  ],
   "ct3aMetadata": {
     "initVersion": "7.39.3"
   },
